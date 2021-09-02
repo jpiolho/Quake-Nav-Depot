@@ -2,6 +2,8 @@
 
 This is a repository for Quake 2021 Enhanced bot navigation files where the community can download, edit and contribute.
 
+The goal is to be the place where you can gather the best bot navigation files for any Quake map that exists. 
+
 ## How to download
 
 If you want to download a navigation file for a map, you're going to need [nav2json](https://github.com/jpiolho/nav2json). This tool allows you to convert from .navjson to .nav.
