@@ -8,9 +8,11 @@ The goal is to be the place where you can gather the best bot navigation files f
 
 If you want to download a navigation file for a map, you're going to need [nav2json](https://github.com/jpiolho/nav2json). This tool allows you to convert from .navjson to .nav.
 
-1. Drag and drop the .navjson file into nav2json.exe. This will convert the .navjson to .nav
-2. Place the resulting .nav file into the bot navigation folder (eg: id1/bots/navigation)
-3. Done!
+1. Navigate to the nav you want to download.
+2. Right-click on the 'Raw' button and do 'Save Link As...'
+3. Drag and drop the .navjson file into nav2json.exe. This will convert the .navjson to .nav
+4. Place the resulting .nav file into the bot navigation folder (eg: id1/bots/navigation)
+5. Done!
 
 ## How to contribute
 
