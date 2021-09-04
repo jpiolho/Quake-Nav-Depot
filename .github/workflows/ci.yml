@@ -1,0 +1,133 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the workflow will run
+on:
+
+  push:
+    branches:
+      - master
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: windows-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+        with:
+          path: './quakenavdepot'
+      
+      # Install .Net Core
+      - name: Setup .NET Core SDK
+        uses: actions/setup-dotnet@v1.8.1
+        with:
+          # Optional SDK version to use. If not provided, will install global.json version when available. Examples: 2.2.104, 3.1, 3.1.x
+          dotnet-version: 5.x.x
+      
+      - name: Download nav2json
+        run: Invoke-WebRequest -Uri "https://github.com/jpiolho/nav2json/releases/download/version-1.0.0/Nav2Json_1.0.0_win_x64.zip" -OutFile (New-Item -Path ".\downloads\nav2json.zip" -Force )
+        
+      - name: Extract nav2json
+        run: Expand-Archive -Path ".\downloads\nav2json.zip" -DestinationPath ".\nav2json"
+        
+      - name: Convert all .navjson to .nav
+        run: |
+          $files = Get-ChildItem -Path ".\quakenavdepot\" -Recurse -File -Filter "*.navjson"
+          foreach($file in $files) {
+            .\nav2json\nav2json.exe -nav "$($file.FullName)"
+          }
+          
+      - name: Copy files to output folder
+        run: |
+          # Copy files to the output folder
+          $files = Get-ChildItem -Path ".\quakenavdepot" -Recurse -File -Filter "*.nav"
+          foreach($file in $files) {
+            $gameType = (Split-Path (Split-Path -Path $file.FullName -Parent) -Leaf)
+            $gameFolder = (Split-Path (Split-Path (Split-Path -Path $file.FullName -Parent) -Parent) -Leaf)
+          
+            $destination = ".\output\$($gameType)\$($gameFolder)\bots\navigation"
+            New-Item -Path $destination -ItemType "directory" -ErrorAction Ignore
+            Copy-Item -Path $file.FullName -Destination "$($destination)\$($file.Name)" -ErrorAction Ignore
+          }
+      
+      - name: Build zip files
+        run: |
+          # Build zip
+          $artifactFiles = New-Object Collections.Generic.List[String]
+          $outputFolder = Join-Path -Path (Get-Location).Path -ChildPath "output"
+          $gameTypes = @("deathmatch","cooperative")
+          foreach($gameType in $gameTypes) {
+            $outputGameTypeFolder = Join-Path -Path $outputFolder -ChildPath $gameType
+            if(-not(Test-Path -Path $outputGameTypeFolder -PathType Container)) {
+              continue
+            }
+          
+            $gameFolders = (Get-ChildItem -Path $outputGameTypeFolder -Directory)
+          
+            $first = $true
+            foreach($gameFolder in $gameFolders) {
+              Push-Location $gameFolder.FullName
+          
+              $zipName = "QuakeNavDepot_$($gameType).zip"
+              $zipPath = Join-Path -Path $outputFolder -ChildPath $zipName
+          
+              # Create zip file if its the first mod.
+              # The reason being that the Compress-Archive always creates the root folder
+              if($first -eq $true) {
+                Write-Host "Creating $($zipName) for $($gameFolder.Name)"
+                Compress-Archive -Path "." -DestinationPath "$($outputFolder)\QuakeNavDepot_$($gameType).zip"
+                $first = $false
+                $artifactFiles.Add($zipPath)
+              } else {
+                # Update zip file since its not the first mod
+                Write-Host "Updating $($zipname) for $($gameFolder.Name)"
+                Compress-Archive -Path "." -DestinationPath "$($outputFolder)\QuakeNavDepot_$($gameType).zip" -Update
+              }
+          
+              Pop-Location
+            }
+          }
+          
+          $artifacts = [String]::Join(",",$artifactFiles)
+          Write-Host "Artifacts: $artifacts"
+          "NAV_ARTIFACTS=$artifacts" | Out-File $env:GITHUB_ENV
+          
+          
+      - name: Setup git remote
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Delete latest tag
+        continue-on-error: true
+        working-directory: '.\quakenavdepot'
+        run: git push --delete origin latest
+      
+      - name: Push new latest tag
+        working-directory: '.\quakenavdepot'
+        run: |
+          git tag latest
+          git push origin latest
+      
+      - name: Create Release
+        uses: ncipollo/release-action@v1.8.8
+        with:
+          allowUpdates: true
+          commit: 'master'
+          name: 'Nav Files'
+          body: 'The latest versions of all .nav files'
+          artifacts: ${{env.NAV_ARTIFACTS}}
+          tag: 'latest'
+        
+          
+          
