@@ -6,7 +6,7 @@ The goal is to be the place where you can gather the best bot navigation files f
 
 ## How to download
 
-On the right side of the page, you'll find under 'Releases' a package containing all the .nav files in the repository.
+On the right side of the page, you'll find under 'Releases' a package containing all the .nav files in the repository. Extract the zip into your /rerelease folder and you're good to go! Or pick and choose the .nav files from the zip if you wish.
 
 Alternatively if you want to download a single navigation file for a map, you're going to need [nav2json](https://github.com/jpiolho/nav2json). This tool allows you to convert from .navjson to .nav.
 
