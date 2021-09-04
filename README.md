@@ -6,7 +6,9 @@ The goal is to be the place where you can gather the best bot navigation files f
 
 ## How to download
 
-If you want to download a navigation file for a map, you're going to need [nav2json](https://github.com/jpiolho/nav2json). This tool allows you to convert from .navjson to .nav.
+On the right side of the page, you'll find under 'Releases' a package containing all the .nav files in the repository.
+
+Alternatively if you want to download a single navigation file for a map, you're going to need [nav2json](https://github.com/jpiolho/nav2json). This tool allows you to convert from .navjson to .nav.
 
 1. Navigate to the nav you want to download.
 2. Right-click on the 'Raw' button and do 'Save Link As...'
