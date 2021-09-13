@@ -7,9 +7,9 @@
     "Urls": []
   },
   "Contributors": [
-	"JPiolho"
+    "JPiolho"
   ],
-  "Comments": "",
+  "Comments": "Bots unable to access quad damage secret because they can't navigate lava. Low gravity navigation tricky but possible.",
   "Nodes": [
     {
       "Origin": [
