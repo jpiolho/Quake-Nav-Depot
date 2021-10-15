@@ -35,7 +35,7 @@ jobs:
           dotnet-version: 5.x.x
       
       - name: Download nav2json
-        run: Invoke-WebRequest -Uri "https://github.com/jpiolho/nav2json/releases/download/version-1.0.0/Nav2Json_1.0.0_win_x64.zip" -OutFile (New-Item -Path ".\downloads\nav2json.zip" -Force )
+        run: Invoke-WebRequest -Uri "https://github.com/jpiolho/nav2json/releases/download/version-1.1.0/Nav2Json_1.1.0_win_x64.zip" -OutFile (New-Item -Path ".\downloads\nav2json.zip" -Force )
         
       - name: Extract nav2json
         run: Expand-Archive -Path ".\downloads\nav2json.zip" -DestinationPath ".\nav2json"
