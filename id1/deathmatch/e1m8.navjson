@@ -1,5 +1,5 @@
 {
-  "Version": 1,
+  "Version": 2,
   "Map": {
     "Name": "Ziggurat Vertigo",
     "Author": "American McGee",
@@ -735,8 +735,7 @@
               -639,
               -727
             ],
-            "Targetname": 0,
-            "Classname": -11
+            "EntityId": -11
           }
         }
       ],
@@ -2698,8 +2697,7 @@
               -639,
               -727
             ],
-            "Targetname": 0,
-            "Classname": -12
+            "EntityId": -12
           }
         }
       ],
@@ -5518,8 +5516,7 @@
               769,
               -727
             ],
-            "Targetname": 0,
-            "Classname": -10
+            "EntityId": -10
           }
         },
         {
@@ -5594,8 +5591,7 @@
               241,
               129
             ],
-            "Targetname": 0,
-            "Classname": -112
+            "EntityId": -112
           }
         },
         {

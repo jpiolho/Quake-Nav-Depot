@@ -1,5 +1,5 @@
 {
-  "Version": 1,
+  "Version": 2,
   "Map": {
     "Name": "The House Of Cthon",
     "Author": "American McGee",
@@ -170,8 +170,7 @@
               137,
               33
             ],
-            "Targetname": 0,
-            "Classname": -104
+            "EntityId": -104
           }
         },
         {
@@ -228,8 +227,7 @@
               137,
               33
             ],
-            "Targetname": 0,
-            "Classname": -104
+            "EntityId": -104
           }
         },
         {
@@ -939,8 +937,7 @@
               137,
               -31
             ],
-            "Targetname": 0,
-            "Classname": -14
+            "EntityId": -14
           }
         }
       ],
@@ -989,8 +986,7 @@
               137,
               -31
             ],
-            "Targetname": 0,
-            "Classname": -14
+            "EntityId": -14
           }
         },
         {
@@ -2893,7 +2889,7 @@
         -137.09975,
         16.531242
       ],
-      "Flags": 96,
+      "Flags": 320,
       "Links": [
         {
           "Target": [
@@ -2920,7 +2916,7 @@
         -50.015743,
         -15.46875
       ],
-      "Flags": 96,
+      "Flags": 320,
       "Links": [
         {
           "Target": [
@@ -2947,7 +2943,7 @@
         62.499207,
         -15.46875
       ],
-      "Flags": 96,
+      "Flags": 320,
       "Links": [
         {
           "Target": [
@@ -2982,7 +2978,7 @@
         178.22707,
         -15.468765
       ],
-      "Flags": 96,
+      "Flags": 320,
       "Links": [
         {
           "Target": [
@@ -3009,7 +3005,7 @@
         269.06387,
         16.53125
       ],
-      "Flags": 96,
+      "Flags": 320,
       "Links": [
         {
           "Target": [
