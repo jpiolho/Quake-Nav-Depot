@@ -32,10 +32,10 @@ jobs:
         uses: actions/setup-dotnet@v1.8.1
         with:
           # Optional SDK version to use. If not provided, will install global.json version when available. Examples: 2.2.104, 3.1, 3.1.x
-          dotnet-version: 5.x.x
+          dotnet-version: 6.x.x
       
       - name: Download nav2json
-        run: Invoke-WebRequest -Uri "https://github.com/jpiolho/nav2json/releases/download/version-1.1.0/Nav2Json_1.1.0_win_x64.zip" -OutFile (New-Item -Path ".\downloads\nav2json.zip" -Force )
+        run: Invoke-WebRequest -Uri "https://github.com/jpiolho/nav2json/releases/download/version-2.0.0/Nav2Json_v2.0.0_win_x64.zip" -OutFile (New-Item -Path ".\downloads\nav2json.zip" -Force )
         
       - name: Extract nav2json
         run: Expand-Archive -Path ".\downloads\nav2json.zip" -DestinationPath ".\nav2json"
